@@ -1,0 +1,59 @@
+/*
+ * File: dialoguploadproject.component.css
+ * Version: 1.0
+ * Type: css
+ * Date: 24-05-2017
+ * Author: Alberto Giudice
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ *
+ * Registro modifiche:
+ * Alberto Giudice || 24-05-2017 || creazione css per il componente dialoguploadproject
+ *
+ */
+
+
+.popup {
+	width:30em;
+}
+
+.popup h2{
+	font-size: 2em;
+	font-family: 'Roboto Light 100', sans-serif;
+	margin-top: 0.5em;
+	margin-bottom: 1em;
+	color: #424242;
+}
+
+.popup p{
+  font-size: 1.3em;
+  font-style: italic;
+  font-family: 'Roboto Light', sans-serif;
+  color: #424242;
+}
+
+#fileInput {
+  width: 100%;
+  font-size: 1.3em;
+  font-family: 'Roboto Light', sans-serif;
+  color: #424242;
+}
+
+input[type="file"] {
+  font-size: 1.9em;
+  font-family: 'Roboto Light', sans-serif;
+  color: #424242;
+  padding-right: 1em;
+}
+
+.btn-success {
+	float:right;
+	font-size: 1.3em;
+	font-family: 'Roboto Light', sans-serif;
+    padding: 0.3em;
+    width: 35%;
+    margin-top: 1em;
+    color: #ededed;
+}

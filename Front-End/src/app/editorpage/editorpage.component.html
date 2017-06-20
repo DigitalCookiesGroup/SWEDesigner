@@ -1,0 +1,60 @@
+<!--
+ * File: editorpage.component.html
+ * Version: 1.0
+ * Type: html
+ * Date: 15-06-2017
+ * Author: Alberto Giudice
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ * Registro modifiche:
+ * Alberto Giudice || 15-06-2017 ||creazione div html per il componente che contiene la i componenti della generazione di codice
+ *
+-->
+
+
+
+
+<router-outlet>
+<div id="logoContainer">
+<a routerLink=""><img src="./assets/logo.png" id="headerLogo" /></a>
+</div>
+
+<nav md-tab-nav-bar id="tabs">
+
+  <a md-tab-link class="tabLink"
+     [routerLink]="['classpage']"
+     routerLinkActive #rl1="routerLinkActive"
+     [active]="rl1.isActive">
+   	 Classi
+  </a>
+    <a md-tab-link class="tabLink"
+     [routerLink]="['activitypage']"
+     routerLinkActive #rl2="routerLinkActive"
+     [active]="rl2.isActive">
+   	 Attività
+  </a>
+    <a md-tab-link class="tabLink"
+     [routerLink]="['codepage']"
+     routerLinkActive #rl3="routerLinkActive"
+     [active]="rl3.isActive">
+  	 Codice
+  </a>
+</nav>
+
+<div id="savehomeContainer">
+	<div class="headerIcon">
+  <img src="./assets/save.svg" (click)="saveProject()" />
+  </div>
+  <div class=headerIcon>
+  <a routerLink=""><img src="./assets/home.svg" /></a>
+  </div>
+</div>
+
+</router-outlet>
+
+
+
+
+

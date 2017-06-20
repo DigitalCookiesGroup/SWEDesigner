@@ -1,0 +1,66 @@
+/*
+ * File: codegeneratepalette.component.css
+ * Version: 0.9
+ * Type: css
+ * Date: 18-06-2017
+ * Author: Alberto Giudice
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ * Registro modifiche:
+ * Alberto Giudice || 18-06-2017 ||creazione css per il componente codegeneratepalette
+ *
+ */
+
+
+
+.paletteDX {
+  float:right;
+  display:inline-block;
+  width:20%;
+  height: 100%;
+  background-color: #2e323e;
+  padding: 0.5em;
+  overflow-y: scroll;
+}
+
+#code h2 {
+  text-align: right;
+  font-size: 1.7em;
+  font-family: 'Roboto Regular', sans-serif;
+  color: #ededed;
+  padding-right: 0.5em;
+  overflow: hidden;
+}
+
+.mat-radio-button {
+  padding-right: 1em;
+  width: 100%;
+  text-align: right;
+  font-size: 1.3em;
+  font-family: 'Roboto Light', sans-serif;
+  color: #ededed;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.paletteDX button {
+  width: 80%;
+  margin: 0 10%;
+  font-family: 'Roboto Light', sans-serif;
+  font-size: 1.4em;
+  padding: 0.2em;
+  color: #ededed;
+  margin-top: 0.7em;
+}
+
+#code {
+  height: 83%;
+}
+
+#buttonGenerate {background-color:#f4511e;}
+#buttonGenerate:hover {background-color:#e64a19;}
+
+#buttonExport {background-color:#1976d2;}
+#buttonExport:hover {background-color:#1565c0;}

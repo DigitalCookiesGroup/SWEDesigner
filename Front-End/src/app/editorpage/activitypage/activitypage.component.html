@@ -1,0 +1,29 @@
+<!--
+* File: acitivitypage.component
+* Version: 1.0
+* Type: html
+* Date: 06-06-2017
+* Author: Alessia Bragagnolo
+* E-mail: digital.cookies.group@gmail.com
+*
+* License: GNU General Public License v3.0
+*
+*
+* Registro modifiche:
+* Alessia Bragagnolo || 06-06-2017 || creazione collegamenti ai componenti classimetodipalette, activitydiagrameditor, activitydiagrampalette e libreriapalette
+*
+*/
+-->
+
+<div class="projectnameBar">{{this.project.getName()}}</div>
+<div class="container">
+<app-classimetodipalette></app-classimetodipalette>
+<app-activitydiagrameditor></app-activitydiagrameditor>
+  <div id="switch-button" (click)="open()">
+    <span *ngIf="!openpalette" >PASSA A <strong>LIBRERIA</strong></span>
+    <span *ngIf="openpalette">PASSA A <strong>PALETTE</strong></span>
+  </div>
+<app-activitydiagrampalette *ngIf="!openpalette"></app-activitydiagrampalette>
+  <app-libreriapalette *ngIf="openpalette"></app-libreriapalette>
+
+</div>

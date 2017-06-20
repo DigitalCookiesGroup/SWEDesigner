@@ -1,0 +1,79 @@
+/*
+ * File: editorpage.component.css
+ * Version: 1.0
+ * Type: css
+ * Date: 16-06-2017
+ * Author: Carlo Sindico
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ * Registro modifiche:
+ * Carlo Sindico || 16-06-2017 ||creazione css per il componente editorpage
+ *
+ */
+
+
+
+#logoContainer{
+  	width: 20%;
+	float:left;
+	padding-left: 4em;
+	padding-top: 0.3em;
+}
+
+#headerLogo {
+	width: 11em;
+}
+
+#tabs{
+	height: 3.5em;
+	width: 60%;
+	text-align:center;
+	float: left;
+}
+
+#savehomeContainer {
+	width: 20%;
+	float:right;
+	text-align: center;
+	padding-right: 4em;
+	padding-top: 0.6em;
+}
+
+#savehomeContainer img {
+	padding-left: 2em;
+	padding-right: 2em;
+	width: 6.3em;
+}
+
+.tabLink {
+	font-size: 1.5em;
+	color: #424242;
+	font-family: 'Roboto Regular', sans-serif;
+	text-transform: uppercase;
+	opacity:0.6;
+}
+
+.tabLink:hover {
+	text-decoration: none;
+	font-weight: bold;
+	opacity:1;
+}
+
+.headerIcon {
+	width: 50%;
+	float:left;
+}
+
+.headerIcon img {
+	opacity: 0.6;
+}
+
+.headerIcon img:hover {
+	opacity: 1;
+}
+
+a:-webkit-any-link {
+	text-decoration: none;
+}

@@ -1,0 +1,33 @@
+<!--
+* File: classimetodipalette.component
+* Version: 1.0
+* Type: html
+* Date: 30-05-2017
+* Author: Carlo Sindico
+* E-mail: digitalcookies.group@gmail.com
+*
+* License: GNU General Public License v3.0
+*
+*
+* Registro modifiche:
+* Carlo Sindico || 30-05-2017 || creazione div html per contenere la palette di sinistra del diagramma delle attività
+*
+*/
+-->
+
+<span class="paletteSX">
+  <h2>Lista Metodi</h2>
+  <div class="myActivityItem" *ngFor="let class of this.project.getClassesNames()">
+         <h3>
+           {{class}}
+         </h3>
+           <ul>
+             <li class="method" *ngFor="let method of this.project.getClassMethods(class)" (click)="this.project.setSelectedMethod(class, method)">
+               <span class="methodListActive" *ngIf="this.project.getSelectedMethod()[0] === class && this.project.getSelectedMethod()[1] === method">{{method}}</span>
+               <span class="methodList" *ngIf="!(this.project.getSelectedMethod()[0] === class && this.project.getSelectedMethod()[1] === method)">{{method}}</span>
+               <span *ngIf="(this.project.getSelectedMethod()[0] === class && this.project.getSelectedMethod()[1] === method)" (click)="this.project.clearSelectedMethodDiagram()" ><img  src="../../../../assets/x.svg" class="delete-method"></span>
+             </li>
+           </ul>
+  </div>
+</span>
+

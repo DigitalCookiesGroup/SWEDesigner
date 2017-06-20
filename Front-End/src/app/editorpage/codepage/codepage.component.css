@@ -1,0 +1,41 @@
+/*
+ * File: codepage.component.css
+ * Version: 1.0
+ * Type: css
+ * Date: 16-06-2017
+ * Author: Alberto Giudice
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ * Registro modifiche:
+ * Alberto Giudice || 16-06-2017 ||creazione css per il componente codepage
+ *
+ */
+
+
+
+.projectnameBar {
+	height: 1.8em;
+	line-height: 1.8em;
+	font-size: 1.4em;
+	background-color: #1976d3;
+	color: #ededed;
+	text-align: center;
+	width: 100%;
+	clear: left;
+  	font-family: 'Roboto Light', sans-serif;
+}
+
+.container {
+	position: absolute;
+	height: auto;
+	font-size: 1.3em;
+	top: 4.6em;
+	bottom: 2em;
+	width: 100%;
+	padding: 0;
+	margin-right: 0;
+	margin-left: 0;
+	overflow:hidden;
+}

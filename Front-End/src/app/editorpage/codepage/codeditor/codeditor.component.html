@@ -1,0 +1,18 @@
+<!--
+ * File: codeditor.component.html
+ * Version: 0.9
+ * Type: html
+ * Date: 19-06-2017
+ * Author: Carlo Sindico
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ * Registro modifiche:
+ * Carlo Sindico || 19-06-2017 ||creazione div html contente l'editor del codice
+ *
+-->
+
+<span class="diagramBlock">
+        <div ace-editor id="codeEditor" [theme]="'katzenmilch'" [text]="this.project.getCode()"></div>
+</span>

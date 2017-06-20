@@ -1,0 +1,53 @@
+/*
+ * File: codelistafilepalette.component.css
+ * Version: 0.9
+ * Type: css
+ * Date: 18-06-2017
+ * Author: Alberto Giudice
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ * Registro modifiche:
+ * Alberto Giudice || 18-06-2017 ||creazione css per il componente codelistafilepalette
+ *
+ */
+
+
+
+.paletteSX {
+  float:left;
+  display:inline-block;
+  width:20%;
+  height: 100%;
+  background-color: #2e323e;
+  padding: 0.5em;
+  overflow-y: scroll;
+}
+
+.paletteSX h2 {
+  font-size: 1.7em;
+  font-family: 'Roboto Regular', sans-serif;
+  color: #ededed;
+  padding-left: 0.5em;
+}
+
+#fileList ul {
+  margin-left: 0.2em;
+  padding-right: 0.3em;
+  list-style-type: square;
+  font-size: 1.1em;
+  font-family: 'Roboto Light', sans-serif;
+  color: #bdbdbd;
+  line-height: 1.5em;
+}
+
+#fileList li {
+  width: 100%;
+  float: left;
+}
+
+#fileList li:hover {
+  color: #fdd835;
+}
+

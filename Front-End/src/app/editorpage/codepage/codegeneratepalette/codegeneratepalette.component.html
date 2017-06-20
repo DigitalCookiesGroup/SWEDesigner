@@ -1,0 +1,30 @@
+<!--
+ * File: codegeneratepalette.component.html
+ * Version: 0.9
+ * Type: html
+ * Date: 17-06-2017
+ * Author: Saverio Follador
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ * Registro modifiche:
+ * Saverio Follador || 17-06-2017 ||creazione div html contente i bottoni di generazione ed esporta codice
+ *
+-->
+
+
+
+
+<span class="paletteDX">
+      <div id="code">
+        <h2>Linguaggio</h2>
+        <md-radio-group>
+          <md-radio-button labelPosition="before">Java</md-radio-button>
+        </md-radio-group>
+        <button type="submit" md-raised-button id="buttonGenerate" color="primary" (click)="generateCode()">Genera</button>
+      </div>
+      <div id="generate">
+        <button type="submit" md-raised-button id="buttonExport" color="primary" (click)="exportCode()">Esporta</button>
+      </div>
+    </span>

@@ -1,0 +1,51 @@
+<!--
+* File: libreriafiltripalette.component.html
+* Version: 1.0
+* Type: html
+* Date: 30-05-2017
+* Author: Alberto Giudice
+* E-mail: digitalcookies.group@gmail.com
+*
+* License: GNU General Public License v3.0
+*
+* Registro modifiche:
+* Alberto Giudice || 30-05-2017 || creazione div html contenente la palette per recuperare i pattern e le classi dal Back-end
+*
+*/
+-->
+
+<span class="paletteSX">
+  <div id="library">
+    <h2>Libreria</h2>
+    <div id="library-items">
+      <h3 (click)="open1()">
+        <span class="plus" *ngIf="!toggleList1"><img src="../../../../assets/piu.svg" class="listImage"></span>
+        <span class="minus" *ngIf="toggleList1"><img src="../../../../assets/meno.svg" class="listImage"></span>
+        Classi
+      </h3>
+      <div *ngIf="toggleList1">
+        <ul *ngFor="let class of classes">
+          <li id={{class.Id}} [attr.listened]="false" class="libr">{{class.Titolo}}</li>
+        </ul>
+      </div>
+      <h3 (click)="open2()">
+        <span class="plus" *ngIf="!toggleList2"><img src="../../../../assets/piu.svg" class="listImage"></span>
+        <span class="minus" *ngIf="toggleList2"><img src="../../../../assets/meno.svg" class="listImage"></span>
+        Pattern
+      </h3>
+      <div *ngIf="toggleList2">
+        <ul *ngFor="let pattern of patterns">
+          <li id={{pattern.Id}} [attr.listened]="false" class="libr">{{pattern.Titolo}} <span><img src="../../../../assets/{{pattern.Titolo}}.png"></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="filter">
+    <h2>Filtri</h2>
+      <md-checkbox [checked]="true" [disabled]="true">Priorità 1</md-checkbox>
+      <md-checkbox id="check2" [checked]="isChecked1" (change)="toggle(1)">Priorità 2</md-checkbox>
+      <md-checkbox id="check3" [checked]="isChecked2" (change)="toggle(2)">Priorità 3</md-checkbox>
+      <md-checkbox id="check4" [checked]="isChecked3" (change)="toggle(3)">Priorità 4</md-checkbox>
+      <md-checkbox id="check5" [checked]="isChecked4" (change)="toggle(4)">Priorità 5</md-checkbox>
+  </div>
+</span>

@@ -1,0 +1,32 @@
+<!--
+ * File: dialoguploadproject.component.html
+ * Version: 1.0
+ * Type: html
+ * Date: 23-05-2017
+ * Author: ALberto Giudice
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ *
+ * Registro modifiche:
+ * Alberto Giudice || 23-05-2017 || creazione di html per contenere il componente dialoguploadproject
+ *
+-->
+
+
+
+	<div class="popup">
+        <h2>Carica Progetto</h2>
+        <form>
+          <div class="form-group">
+            <input id="fileInput" name="file" type="file" class="ng-hide" multiple (change)="upload($event)">
+          </div>
+          <p *ngIf="!validProject && !firstTime">Selezionare un progetto compatibile</p>
+          <button type="submit" class="btn btn-success" *ngIf="!validProject" disabled>CARICA</button>
+          <button type="submit" class="btn btn-success" *ngIf="validProject" (click)="dialogRef.close()" routerLink="/editorpage/classpage">CARICA</button>
+        </form>
+    </div>
+
+
+

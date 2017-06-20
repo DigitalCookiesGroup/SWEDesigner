@@ -1,0 +1,37 @@
+<!--
+* File: activitydiagrampalette.component
+* Version: 0.9
+* Type: html
+* Date: 02-06-2017
+* Author: Carlo Sindico
+* E-mail: digitalcookies.group@gmail.com
+*
+* License: GNU General Public License v3.0
+*
+*
+* Registro modifiche:
+* Carlo Sindico || 02-06-2017 || creazione div html per contenere la palette di destra della libreria dei metodi prelevati dal Back-end
+*
+-->
+
+
+<span class="paletteDX" xmlns="http://www.w3.org/1999/html">
+    <div class="myActivityLibraryItem" *ngFor="let class of this.project.getClassesNames(); let i=index" [attr.data-index]="i">
+      <span class="insertMethod"><img src="../../../../assets/insert.svg" class="listImage"></span>
+      <h2 (click)="open(i)">
+           {{class}}
+            <span class="plus" *ngIf="!toggleList[i]"><img src="../../../../assets/piu.svg" class="listImage"></span>
+        <span class="minus" *ngIf="toggleList[i]"><img src="../../../../assets/meno.svg"  class="listImage"></span>
+         </h2>
+               <span class = "methodDescription" *ngIf="toggleList[i]">
+                  <p>SEGNATUARA:
+                 int fun(int, double)
+                  PRECONDIZIONE:
+                    descr. precondizione
+                  POSTCONDIZIONE:
+                 descr. postcondizione
+                  </p>
+               </span>
+
+    </div>
+  </span>

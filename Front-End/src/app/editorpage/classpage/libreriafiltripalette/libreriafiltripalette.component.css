@@ -1,0 +1,102 @@
+/*
+ * File: libreriafiltripalette.component.css
+ * Version: 1.0
+ * Type: css
+ * Date: 31-05-2017
+ * Author: Alberto Giudice
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ * Registro modifiche:
+ * Alberto Giudice || 31-05-2017 || creazione css per la palette per recuperare i pattern e le classi dal Back-end
+ *
+ */
+
+.paletteSX {
+	float:left;
+	display:inline-block;
+	width:20%;
+	height: 100%;
+	background-color: #2e323e;
+  padding: 0.5em;
+}
+
+.paletteSX h2 {
+  font-size: 1.7em;
+  font-family: 'Roboto Regular', sans-serif;
+  color: #ededed;
+  padding-left: 0.5em;
+}
+
+#library-items h3{
+  font-size: 1.3em;
+  font-family: 'Roboto Light', sans-serif;
+  color: #ededed;
+}
+
+.listImage {
+  width: 0.85em;
+  margin-left: 1em;
+  margin-right: 0.1em;
+  padding-bottom: 0.2em;
+}
+
+#library-items ul {
+  margin-left: 0.85em;
+  list-style-type: square;
+  font-size: 1em;
+  font-family: 'Roboto Light', sans-serif;
+  color: #bdbdbd;
+  line-height: 1em;
+}
+
+#library-items li span {
+  display: none;
+}
+
+#library-items li:hover  {
+  color: #ededed;
+}
+
+#library-items li:hover span{
+  display: block;
+  position: fixed;
+  left: 23em;
+  top: 12.3em;
+  z-index: 99;
+}
+
+
+.mat-checkbox {
+  padding-left: 1em;
+  font-size: 1.2em;
+  font-family: 'Roboto Thin', sans-serif;
+  color: #ededed;
+  line-height: 1.5em;
+}
+
+
+
+/*
+
+
+.mat-list-item {
+  font-size: 1.2em;
+  font-family: 'Roboto Thin', sans-serif;
+  color: #ededed;
+  height: 1em;
+}
+
+.mat-list-item-content {
+  color: black;
+  height: 1em;
+}
+
+.md-list-item li{
+  font-size: 0.1em;
+}
+
+.mat-checkbox-checkmark-path{stroke:#ededed!important}
+
+.mat-checkbox-frame{border-color:white}*/

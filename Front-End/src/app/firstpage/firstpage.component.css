@@ -1,0 +1,58 @@
+/*
+ * File: firstpage.component.css
+ * Version: 1.0
+ * Type: css
+ * Date: 24-05-2017
+ * Author: Alberto Giudice
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ *
+ * Registro modifiche:
+ * Alberto Giudice || 24-05-2017 || creazione css per il componente firstpage
+ *
+ */
+
+
+
+
+.firstpage {
+	height:100%;
+	display:table;
+	margin-left:auto;
+	margin-right:auto;
+
+}
+
+.slogan {
+	display:table-cell;
+	vertical-align:middle;
+	text-align: center;
+}
+
+.slogan h1 {
+	font-size: 2.5em;
+	font-family: 'Roboto Thin', sans-serif;
+	color: #424242;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.buttons button {
+	width: 40%;
+	font-family: 'Roboto Light', sans-serif;
+    font-size: 1.7em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    padding: 0.3em;
+    color: #ededed;
+}
+
+#button1 {background-color:#f4511e;}
+#button1:hover {background-color:#e64a19;}
+
+#button2 {background-color:#1976d2;}
+#button2:hover {background-color:#1565c0;}
+
+

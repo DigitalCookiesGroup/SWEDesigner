@@ -1,0 +1,25 @@
+<!--
+ * File: codelistafilepalette.component.html
+ * Version: 0.9
+ * Type: html
+ * Date: 17-06-2017
+ * Author: Alberto Rossetti
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ * Registro modifiche:
+ * Alberto Rossetti || 17-06-2017 ||creazione div html per la palette contente i file del codice generato
+ *
+-->
+
+<span class="paletteSX">
+    <div id="fileList">
+      <h2>    Lista File     </h2>
+           <ul>
+             <li  *ngFor="let file of this.code.files">
+                {{file.getName()}}
+             </li>
+           </ul>
+  </div>
+</span>

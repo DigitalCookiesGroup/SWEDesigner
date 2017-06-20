@@ -1,0 +1,32 @@
+/*
+ * File: activitydiagrampalette.component
+ * Version: 1.0
+ * Type: css
+ * Date: 30-05-2017
+ * Author: Alberto Giudice, Carlo Sindico
+ * Email: digitalcookies.group@gmail.com
+ *
+ *
+ * License: GNU General Public License v3.0
+ *
+ *
+ * Registro modifiche:
+ * Carlo Sindico || 31-05-2017 || correzioni delle proprietà di .paletteDX
+ * Alberto Giudice || 30-05-2017 || inizializzazione css per la palette di destra del diagramma delle attività
+ */
+
+
+
+.paletteDX {
+	float:right;
+	display:inline-block;
+	width:20%;
+	height: 100%;
+	background-color: #2e323e;
+	color: #ededed;
+  	font-size: 1.3em;
+  	padding: 0.5em;
+  	font-family: 'Roboto Light', sans-serif;
+  	text-align: center;
+  padding-bottom: 2.5em;
+}

@@ -1,0 +1,35 @@
+/*
+ * File: codeditor.component.css
+ * Version: 0.9
+ * Type: css
+ * Date: 19-06-2017
+ * Author: Alberto Giudice
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ * Registro modifiche:
+ * Alberto Giudice || 19-06-2017 ||creazione css per il componente codeditor
+ *
+ */
+
+
+.diagramBlock {
+	float: left;
+	display:inline-block;
+	width:60%;
+	height: 100%;
+	background-color: #ededed;
+	color: #424242;
+  	font-size: 1.3em;
+  	font-family: 'Roboto Light', sans-serif;
+  	text-align: center;
+  	overflow: auto;
+  }
+
+  #codeEditor {
+  	height: 100%;
+  	width:100%;
+  	overflow: auto;
+    font-size: 0.7em;
+  }

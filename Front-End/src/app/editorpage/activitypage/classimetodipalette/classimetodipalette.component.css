@@ -1,0 +1,98 @@
+/*
+ * File: classimetodipalette.component
+ * Version: 1.0
+ * Type: css
+ * Date: 01-06-2017
+ * Author: Alberto Giudice, Carlo Sindico
+ * Email: digitalcookies.group@gmail.com
+ *
+ *
+ * License: GNU General Public License v3.0
+ *
+ *
+ * Registro modifiche:
+ * Carlo Sindico || 02-06-2017 || correzioni delle proprietà di .paletteSX
+ * Alberto Giudice || 01-06-2017 || inizializzazione css per la palette di sinistra del diagramma delle attività
+ */
+
+
+
+
+.paletteSX {
+  float:left;
+  display:inline-block;
+  width:20%;
+  height: 100%;
+  background-color: #2e323e;
+  padding: 0.5em;
+  overflow-y: scroll;
+}
+
+.paletteSX h2 {
+  font-size: 1.7em;
+  font-family: 'Roboto Regular', sans-serif;
+  color: #ededed;
+  padding-left: 0.5em;
+}
+
+.myActivityItem h3 {
+  font-size: 1.3em;
+  font-family: 'Roboto Light', sans-serif;
+  color: #ededed;
+  padding-left: 0.5em;
+  padding-top: 0.5em;
+  margin-bottom: 0.2em;
+  overflow: hidden;
+  clear: both;
+}
+
+.delete-method {
+  width: 0.65em;
+  padding-bottom: 0.3em;
+  float: right;
+  opacity: 0.7;
+}
+
+.delete-method:hover {
+  opacity:1.0;
+}
+
+.myActivityItem {
+  padding-left: 0.85em;
+}
+
+
+.myActivityItem ul {
+  margin-left: 1.1em;
+  padding-left: 1em;
+  padding-right: 0.3em;
+  list-style-type: square;
+  font-size: 1em;
+  font-family: 'Roboto Light', sans-serif;
+  color: #bdbdbd;
+  line-height: 1.3em;
+}
+
+.myActivityItem li {
+  width: 100%;
+  float: left;
+}
+
+.methodList:hover {
+  color: #fdd835;
+}
+
+.methodListActive {
+  color: #fdd835;
+  font-weight: bold;
+;
+}
+
+/*
+.myActivityItem li:hover {
+  color: #ededed;
+}*/
+
+
+
+

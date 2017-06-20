@@ -1,0 +1,33 @@
+<!--
+ * File: dialognewproject.component.html
+ * Version: 1.0
+ * Type: html
+ * Date: 22-05-2017
+ * Author: Alberto Giudice
+ * E-mail: digitalcookies.group@gmail.com
+ *
+ * License: GNU General Public License v3.0
+ *
+ *
+ * Registro modifiche:
+ * Alberto Giudice || 22-05-2017 || creazione di html per contenere il componente dialognewproject
+ *
+-->
+
+
+	<div class="popup">
+        <h2>Nuovo progetto</h2>
+        <form>
+          <div class="form-group">
+            <!--<label for="name">Nome</label>-->
+            <input type="text" class="form-control" id="name" [value]="this.project.getName()" (input)="this.project.setName($event.target.value)" placeholder="Inserisci un nome per il progetto" required>
+          </div>
+          <!--<p *ngIf="this.project.getName()==''"  >Inserisci un nome per il progetto</p>-->
+          <button type="submit" class="btn btn-success" *ngIf="this.project.getName()!=''" routerLink="/editorpage/classpage" (click)="this.dialogRef.close()">CREA</button>
+          <button type="submit" class="btn btn-success" *ngIf="this.project.getName()==''" disabled>CREA</button>
+        </form>
+    </div>
+
+
+
+

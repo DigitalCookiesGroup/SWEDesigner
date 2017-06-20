@@ -1,0 +1,63 @@
+/*
+* File: acitivitypage.component
+* Version: 1.0
+* Type: html
+* Date: 06-06-2017
+* Author: Alberto giudice, Carlo Sindico
+* E-mail: digital.cookies.group@gmail.com
+*
+* License: GNU General Public License v3.0
+*
+*
+* Registro modifiche:
+* Carlo Sindico || 06-06-2017 || correzione regole css di position
+* Alberto Giudice || 06-06-2017 || creazione css per il componente activitypage
+*
+*/
+
+
+.projectnameBar {
+	height: 1.8em;
+	line-height: 1.8em;
+	font-size: 1.4em;
+	background-color: #1976d3;
+	color: #ededed;
+	text-align: center;
+	width: 100%;
+	clear: left;
+  	font-family: 'Roboto Light', sans-serif;
+}
+
+.container {
+	position: absolute;
+	height: auto;
+	font-size: 1.3em;
+	top: 4.6em;
+	bottom: 2em;
+	width: 100%;
+	padding: 0;
+	margin-right: 0;
+	margin-left: 0;
+	overflow: hidden;
+}
+
+#switch-button {
+  background-color: #f6511d;
+  font-size: 1.4em;
+  color: #ededed;
+  text-align: center;
+  width: 100%;
+  font-family: 'Roboto Light', sans-serif;
+  height: 1.8em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+#switch-button:hover {
+  background-color: #e64a19;
+}
+
+#switch-button span {
+  position: relative;
+  bottom: 0.25em;
+  left: 0.1em;
+}
