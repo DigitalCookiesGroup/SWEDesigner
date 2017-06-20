@@ -22,6 +22,6 @@ Seguendo la lista di operazioni riportata di seguito si può installare **SWEDes
 
   1. clonare la repository sul server dove si intende installare **SWEDesigner**;
   2. nell cartella *frontend/SWEDesigner/SWEDesigner-app* lanciare il comando `npm install` per installare le dipendenze (eventualmente da amministratore se richiesto) e successivamente il comando `npm run build` (eventualmente da amministratore se richiesto) per avviare la build del programma;
-  3. appena `npm run build` ha terminato la propria esecuzione copiare la cartella *"dist"* che si sarà creata all'interno della cartella *Backend/public*;
-  4. posizionarsi all'interno della cartella *Backend* e lanciare il comando `npm install` per installare le dipendenze (eventualmente da amministratore se richiesto);
-  5. all'interno della cartella *Backend* lanciare il comando `npm start` per avviare il server (eventualmente da amministratore).
+  3. appena `npm run build` ha terminato la propria esecuzione copiare la cartella *"dist"* che si sarà creata all'interno della cartella *Back-End/public*;
+  4. posizionarsi all'interno della cartella *Back-End* e lanciare il comando `npm install` per installare le dipendenze (eventualmente da amministratore se richiesto);
+  5. all'interno della cartella *Back-End* lanciare il comando `npm start` per avviare il server (eventualmente da amministratore).
