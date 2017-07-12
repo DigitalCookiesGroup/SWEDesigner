@@ -37,7 +37,7 @@ export class FirstpageComponent{
 
 
 	titoloprogetto: string = "SWEDesigner";
-	titoloslogan: string = "Progetta diagrammi UML. Genera codice. Circa.";
+	titoloslogan: string = "Progetta diagrammi UML. Genera codice.";
 
   constructor(private project: Project, public dialog: MdDialog) {
     this.project.reset();

@@ -18,6 +18,7 @@
 
 import {Injectable} from '@angular/core';
 import {Method} from './method';
+import * as Formatter from 'auto-format';
 
 @Injectable()
 export class Project {
@@ -27,6 +28,8 @@ export class Project {
   private selectedMethod = [];
   private methods: Method[] = [];
   private code;
+  private selectedCode;
+  private selectedFileName;
 
   reset() {
     this.name = 'SWEDesigner_Project';
@@ -34,6 +37,7 @@ export class Project {
     this.checkbox = [true, true, true, true, true];
     this.selectedMethod = [];
     this.methods = [];
+    this.selectedFileName= '';
   }
 
   getName() {
@@ -45,8 +49,30 @@ export class Project {
   }
 
   addPatternToClassDiagram(x) {
+    console.log(x.Corpo.nodeDataArray);
+    const y = JSON.parse(this.diagram);
     // aggiunge pattern x al diagramma delle classi
-     console.log(x);
+    // console.log(x);
+    if (x.Corpo.nodeDataArray != null) {
+      y.nodeDataArray = y.nodeDataArray.concat(x.Corpo.nodeDataArray);
+    }
+    if (x.Corpo.linkDataArray != null) {
+      y.linkDataArray = y.linkDataArray.concat(x.Corpo.linkDataArray);
+    }
+    this.diagram = JSON.stringify(y);
+    console.log(this.diagram);
+    console.log(y);
+  }
+
+  addPatternToActivityDiagram(x) {
+    const y = JSON.parse(this.getSelectedMethodDiagram());
+    if (x.Corpo.nodeDataArray != null) {
+      y.nodeDataArray = y.nodeDataArray.concat(x.Corpo.nodeDataArray);
+    }
+    if (x.Corpo.linkDataArray != null) {
+      y.linkDataArray = y.linkDataArray.concat(x.Corpo.linkDataArray);
+    }
+    this.setSelectedMethodDiagram(JSON.stringify(y));
   }
 
   setDiagram(x) {
@@ -60,9 +86,9 @@ export class Project {
 
     for (let meth = 0; meth < this.methods.length; ++meth) {
       for (let i = 0; i < res.nodeDataArray.length; ++i) {
-        if (res.nodeDataArray[i].category === 'Classe' && res.nodeDataArray[i].name === this.methods[meth].getClass()){
-          for (let m = 0; m < res.nodeDataArray[i].methods.length; ++m){
-            if (res.nodeDataArray[i].methods[m].name === this.methods[meth].getName()){
+        if (res.nodeDataArray[i].category === 'Classe' && res.nodeDataArray[i].name === this.methods[meth].getClass()) {
+          for (let m = 0; m < res.nodeDataArray[i].methods.length; ++m) {
+            if (res.nodeDataArray[i].methods[m].name === this.methods[meth].getName()) {
               res.nodeDataArray[i].methods[m].diagram = JSON.parse(this.methods[meth].getDiagram());
             }
           }
@@ -71,7 +97,7 @@ export class Project {
     }
 
     return JSON.stringify(res);
-     // ritorna il diagramma completo
+    // ritorna il diagramma completo
   }
 
   getClassDiagram() {
@@ -82,17 +108,17 @@ export class Project {
   }
 
   /*getActivityDiagram(x: string[]) {
-    // prende diagram
-    // seleziona la porzione contenente il diagramma delle attività richiesto (x contiene classer e metodo)
-    // lo ritorna
-    for (let i = 0; i < this.methods.length; ++i) {
-      if (this.methods[i].getClass() === x[0] && this.methods[i].getName() === x[1]){
-        return this.methods[i];
-      }
-    }
-    return this.methods.push(new Method(x[0], x[1], JSON.stringify({ 'class': 'go.GraphLinksModel', 'nodeDataArray': [], 'linkDataArray': []})));
+   // prende diagram
+   // seleziona la porzione contenente il diagramma delle attività richiesto (x contiene classer e metodo)
+   // lo ritorna
+   for (let i = 0; i < this.methods.length; ++i) {
+   if (this.methods[i].getClass() === x[0] && this.methods[i].getName() === x[1]){
+   return this.methods[i];
+   }
+   }
+   return this.methods.push(new Method(x[0], x[1], JSON.stringify({ 'class': 'go.GraphLinksModel', 'nodeDataArray': [], 'linkDataArray': []})));
 
-  }*/
+   }*/
 
   getClassesNames() {
     // ritorna un array di stringhe con i nomi delle classi prendendoli dal json
@@ -105,6 +131,38 @@ export class Project {
       }
     }
     return res;
+  }
+
+  getClassMethodsCarlo(classe: string, metodo: string) {
+    // ritorna un array di stringhe con i nomi dei metodi della classe
+
+    const json = JSON.parse(this.diagram);
+    const res = [];
+
+    let y = -5;
+
+    for (let i = 0; i < json.nodeDataArray.length; ++i) {
+      if (json.nodeDataArray[i].name === classe && json.nodeDataArray[i].category === 'Classe') { //check sulla categoria per sicurezza
+        y = i;
+      }
+    }
+    if (y >= 0) {
+      let s;
+      for (let i = 0; i < json.nodeDataArray[y].methods.length; ++i) {
+        if (json.nodeDataArray[y].methods[i].name === metodo) { //check sulla categoria per sicurezza
+
+          s = ('(' + (json.nodeDataArray[y].methods[i].parameters) + ')' + ':' + ' ' + (json.nodeDataArray[y].methods[i].type));
+
+          res.push(s);
+        }
+      }
+
+      return res;
+    } else {
+      return;
+    }
+
+
   }
 
   getClassMethods(classe: string) {
@@ -121,11 +179,14 @@ export class Project {
     }
 
     if (y >= 0) {
+
       for (let i = 0; i < json.nodeDataArray[y].methods.length; ++i) {
-        res.push(json.nodeDataArray[y].methods[i].name);
+
+        res.push((json.nodeDataArray[y].methods[i].name));
       }
+
       return res;
-    }else {
+    } else {
       return;
     }
 
@@ -149,6 +210,14 @@ export class Project {
     return this.selectedMethod;
   }
 
+  getSelectedMethodParams() {
+    return this.selectedMethod[0];
+  }
+
+  getSelectedMethodParamsCarlo() {
+    const  p = this.getClassMethodsCarlo(this.selectedMethod[0], this.selectedMethod[1]);
+    return p;
+  }
   getSelectedMethodDiagram() {
     for (let i = 0; i < this.methods.length; ++i){
       if (this.methods[i].getClass() === this.selectedMethod[0] && this.methods[i].getName() === this.selectedMethod[1]){
@@ -167,12 +236,40 @@ export class Project {
     }
   }
 
-  setCode(x: string) {
+  setCode(x) {
     this.code = x;
   }
 
   getCode() {
     return this.code;
+  }
+
+  setSelectedCode(x) {
+    this.selectedCode = '';
+    if (x != null) {
+      const indentToken = '    ';
+      const javaFormatter = Formatter.createJavaFormatter(indentToken);
+      for (let i = 0; i < this.code.length; ++i) {
+        if (this.code[i].name === x) {
+          const y = javaFormatter.format(this.code[i].body);
+          for (let m = 0; m < y.length; ++m) {
+            this.selectedCode += '\n' + y[m];
+          }
+        }
+      }
+    }
+  }
+
+  getSelectedCode(x) {
+    return this.selectedCode;
+  }
+
+  setSelectedFileName(x) {
+    this.selectedFileName=x;
+  }
+
+  getSelectedFileName() {
+    return this.selectedFileName;
   }
 
   clearSelectedMethodDiagram() {
@@ -185,6 +282,28 @@ export class Project {
           });
       }
     }
+  }
+
+  setMethods(x: any[]) {
+    this.methods = [];
+    for (let i = 0; i < x.length; ++i){
+      this.methods[i] = new Method(x[i].class, x[i].name, x[i].diagram);
+    }
+  }
+
+  save() {
+    const y: any = {};
+    y.name = this.name;
+    y.diagram = this.diagram;
+    y.methods = this.methods;
+    return y;
+  }
+
+  upload(x: string) {
+    const y = JSON.parse(x);
+    this.setName(y.name);
+    this.setDiagram(y.diagram);
+    this.setMethods(y.methods);
   }
 
 }

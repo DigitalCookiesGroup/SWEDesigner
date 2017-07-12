@@ -26,9 +26,10 @@ import {Project} from '../../../project';
 })
 export class LibreriapaletteComponent implements OnInit {
 
-  constructor(private project: Project, private templateService: TemplateService) { }
-
   private toggleList: boolean[] = [false];
+  private activityList;
+
+  constructor(private project: Project, private templateService: TemplateService) {}
 
   open(index) {
     // console.log(this.classes.Id);
@@ -37,6 +38,7 @@ export class LibreriapaletteComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.templateService.getActivityList().subscribe(activityList => this.activityList = activityList);
   }
 
 }

@@ -14,7 +14,6 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import {Generatedcode} from '../generatedcode';
 import {Project} from '../../../project';
 
 @Component({
@@ -24,16 +23,17 @@ import {Project} from '../../../project';
 })
 export class CodelistafilepaletteComponent implements OnInit {
 
-  private code: Generatedcode;
-
-  constructor(private project: Project) {
-    // setto un code arbitrario per fare prove
-    this.code = new Generatedcode('');
+  prova(x){
+    console.log(x);
   }
 
-  generateCode(): void {
-    // metodo da invocare alla pressione di genera codice
-    this.code = new Generatedcode(this.project.getFullDiagram());
+  setSelectedFile(x) {
+  this.project.setSelectedCode(x);
+  this.project.setSelectedFileName(x);
+}
+
+  constructor(private project: Project) {
+
   }
 
   ngOnInit() {

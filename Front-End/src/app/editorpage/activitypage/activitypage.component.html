@@ -23,7 +23,8 @@
     <span *ngIf="!openpalette" >PASSA A <strong>LIBRERIA</strong></span>
     <span *ngIf="openpalette">PASSA A <strong>PALETTE</strong></span>
   </div>
-<app-activitydiagrampalette *ngIf="!openpalette"></app-activitydiagrampalette>
+  <span id="containerActivityDX">
+  <app-activitydiagrampalette *ngIf="!openpalette"></app-activitydiagrampalette>
   <app-libreriapalette *ngIf="openpalette"></app-libreriapalette>
-
+  </span>
 </div>

@@ -22,10 +22,11 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class TemplateService {
 
-  private host = 'http://localhost:3000/'; // cambiare prima di compilare
+  private host = ''; // cambiare prima di compilare
   private classesUrl = 'template/categoria/tc';
   private patternsUrl = 'template/categoria/dp';
   private templateUrl = 'template/';
+  private activityUrl = 'template/categoria/ta';
 
   constructor(private http: Http) {}
 
@@ -39,6 +40,11 @@ export class TemplateService {
       .map(this.elaborate);
   }
 
+  getActivityList() {
+    return this.http.get(this.host + this.activityUrl)
+      .map(this.elaborate);
+  }
+
   getTemplate(x: string) {
     return this.http.get(this.host + this.templateUrl + x)
       .map(this.elaborate);
@@ -46,7 +52,7 @@ export class TemplateService {
   }
 
   elaborate(res: Response) {
-    // console.log(res.text());
+    console.log(res.json());
     return res.json();
   }
 

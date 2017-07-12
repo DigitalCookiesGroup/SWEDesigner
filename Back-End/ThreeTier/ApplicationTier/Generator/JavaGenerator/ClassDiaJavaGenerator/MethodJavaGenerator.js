@@ -43,7 +43,7 @@ exports.getGeneratedMethodCode = (obj, objRel, ris) =>{
 						ris = ris + single_par[1] + " " + single_par[0];
 					}
 					if(k < length_list_par-1){
-						ris = ris + ",";
+						ris = ris + ", ";
 					}
 				}
 			}

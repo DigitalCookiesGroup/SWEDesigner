@@ -51,7 +51,10 @@ var corpo = function (string){
 		var node_data_ordinati = instructionJavaGenerator.riordina(node_data, objRel); 
 		for(var i=0; i<node_data_ordinati.length;i++){
 			if(node_data_ordinati[i].key!="START" && node_data_ordinati[i].key!="END"){
-				ritorno = ritorno + instructionJavaGenerator.scrittura(node_data_ordinati[i], objNode, objRel, true);		
+				if(i == node_data_ordinati.length-2) //toglie 2 perchè sono contati in node_data_ordinati anche end e start
+					ritorno = ritorno + "return " + instructionJavaGenerator.scrittura(node_data_ordinati[i], objNode, objRel, true); 
+				else
+					ritorno = ritorno + instructionJavaGenerator.scrittura(node_data_ordinati[i], objNode, objRel, true);		
 			}
 		}
 

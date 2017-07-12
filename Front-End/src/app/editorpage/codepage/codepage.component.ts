@@ -16,7 +16,7 @@
 
 
 import { Component, OnInit } from '@angular/core';
-import {Project} from "../../project";
+import {Project} from '../../project';
 
 @Component({
   selector: 'app-codepage',
@@ -28,6 +28,9 @@ export class CodepageComponent implements OnInit {
   constructor(private project: Project) { }
 
   ngOnInit() {
+    this.project.setSelectedMethod(null, null);
+    this.project.setSelectedCode(null);
+    this.project.setSelectedFileName(null);
   }
 
 }

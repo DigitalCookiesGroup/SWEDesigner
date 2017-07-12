@@ -31,6 +31,7 @@ export class ClassimetodipaletteComponent implements OnInit {
 
   constructor(private templateService: TemplateService, private project: Project) {}
 
+
   open(index) {
     // console.log(this.classes.Id);
     this.toggleList[index] = !this.toggleList[index];

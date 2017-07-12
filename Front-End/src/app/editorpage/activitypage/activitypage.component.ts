@@ -24,6 +24,7 @@ import {Project} from '../../project';
   templateUrl: './activitypage.component.html',
   styleUrls: ['./activitypage.component.css']
 })
+
 export class ActivitypageComponent implements OnInit {
 
   public openpalette = false;

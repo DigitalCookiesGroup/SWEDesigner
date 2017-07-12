@@ -17,7 +17,7 @@
  */
 var express = require('express');
 var router = express.Router();
-//var path = require('path');
+var path = require('path');
 
 var Template = require('./../../../models/template');  //riferimento allo schema
 var template = require('./../../../models/template.js'); //riferimento al modello
@@ -65,7 +65,7 @@ mongoose.connect('mongodb://albero:qwertyuiop@ds143221.mlab.com:43221/templateal
 		var ris = ApplicationController.getGeneratedCode(json);
 
 		//res.sendFile(path.join(__dirname, '../parser', my_file.txt));
-		res.send(ris);
+		res.json(ris);
 	});
 
 	/*(NON UTILE PER IL PROGETTO) GET che stampa tutti gli elementi del db 
@@ -82,11 +82,11 @@ mongoose.connect('mongodb://albero:qwertyuiop@ds143221.mlab.com:43221/templateal
 	});
 	*/
 
-	/*router.get('/:x', function(req, res, next) {
+	router.get('/:x', function(req, res, next) {
 	  var x=req.params.x;
-	  res.sendFile(path.join(__dirname, '../public/dist', x));
+	  res.sendFile(path.join(__dirname, '../../../public/dist', x));
 	});
-	*/
+	
 });
 
 module.exports = router;

@@ -33,10 +33,14 @@ export class DialoguploadprojectComponent implements OnInit {
 
   upload($event): void {
     this.firstTime = false;
-    // validare il file
-    // se non valido imposta validProject==true;
-    // se valido imposta validProject==false e chiama la roba qua sotto
-    this.read($event.target);
+    let fileExt = $event.target.files[0].name.split('.').pop();
+    console.log(fileExt);
+    if(fileExt === 'json') {
+      this.validProject = true;
+      this.read($event.target);
+    } else {
+      this.validProject = false;
+    }
   }
 
   read(input: any): void {
@@ -44,7 +48,7 @@ export class DialoguploadprojectComponent implements OnInit {
     const reader = new FileReader();
     reader.onloadend = () => {
       // salva il contenuto del json caricato nella classe progetto
-      this.project.setDiagram(reader.result);
+      this.project.upload(reader.result);
     };
     reader.readAsText(file);
   }

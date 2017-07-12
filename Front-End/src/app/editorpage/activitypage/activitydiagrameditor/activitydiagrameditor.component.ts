@@ -17,9 +17,10 @@
  */
 
 
-import { Component, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
+import {Component, ElementRef, AfterViewInit, ViewChild, AfterViewChecked} from '@angular/core';
 import * as go from 'gojs';
 import {Project} from '../../../project';
+import {TemplateService} from 'app/services/template.service';
 
 @Component({
   selector: 'app-activitydiagrameditor',
@@ -27,13 +28,13 @@ import {Project} from '../../../project';
   styleUrls: ['./activitydiagrameditor.component.css'],
 })
 
-export class ActivitydiagrameditorComponent implements AfterViewInit {
+export class ActivitydiagrameditorComponent implements AfterViewInit, AfterViewChecked {
 
 
   //ottengo l'id html che conterrà l'editor
   @ViewChild('activityDiagramDiv') element: ElementRef;
 
-  constructor(private project: Project) {}
+  constructor(private project: Project, private templateService: TemplateService) {}
 
   /* funzione che viene chiamata quando il componente ActivityDiagramEditor viene creato
    */
@@ -93,9 +94,60 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
       );
 
 
+    const getListaparametri = (e, node) => {
+      const par = this.project.getSelectedMethodParamsCarlo();
+
+      const array = par[0].split('(');
+      const arr = array[1].split(')');
+      let res = [];
+
+      for (let i = 0; i < arr[0].length; i++){
+        res = arr[0].split(',');
+        myDiagram.startTransaction('agggiunta lista parametro');
+        myDiagram.model.setDataProperty(node.part.data, 'menudata', res);
+        myDiagram.commitTransaction('agggiunta lista parametro');
+      }
+    };
+
+
+    const changeVariabile = (e, obj) => {
+      var testo=(obj.data).split(":");
+      var nomev=testo[0];
+      var tipov=testo[1];
+
+
+      myDiagram.startTransaction('Change nome variabile esistente');
+      myDiagram.model.setDataProperty(obj.part.adornedPart.data, 'nomevariabile',nomev);
+      myDiagram.commitTransaction('Changed nome variabile esistente');
+
+
+      myDiagram.startTransaction('Change tipo variabile esistente');
+      myDiagram.model.setDataProperty(obj.part.adornedPart.data.tipivalori[0], 'type', tipov);
+      myDiagram.commitTransaction('Changed tipo variabile esistente');
+
+
+      myDiagram.startTransaction('Change default value variabile esistente');
+      myDiagram.model.setDataProperty(obj.part.adornedPart.data.tipivalori[0], 'name',"");
+      myDiagram.commitTransaction('Changed default value variabile esistente');
+
+    };
+
+
     //creazione template per il nodo variabile
     const variabiletemplate =
       $(go.Node, 'Auto',
+        {
+          contextMenu:
+            $(go.Adornment, 'Vertical',
+              new go.Binding('itemArray', 'menudata'),
+              {
+                itemTemplate:
+                  $('Button', {width: 150}, { click: function(e, obj) { changeVariabile(e, obj); } },
+                    $(go.TextBlock, new go.Binding('text', ''))
+                  )
+              }),
+          mouseOver: getListaparametri
+        },
         new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
         $(go.Shape, 'Procedure', {
             name: 'SHAPE',
@@ -137,7 +189,7 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
               defaultAlignment: go.Spot.Left,
               itemTemplate: tipovaloreTemplate
             },
-            new go.Binding('visible','variabileVisible').makeTwoWay()
+            new go.Binding('visible', 'variabileVisible').makeTwoWay()
           ),
           $('PanelExpanderButton', 'TIPOVALORE',
             {row: 4, visible: false, column: 1, alignment: go.Spot.TopRight},
@@ -148,6 +200,7 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
 
         ),
       );
+
 
     /* funzione che aggiorna parametersCount in seguito all'aggiunta di un parametro
       @param {node} - node rappresenta il nodo del diagramma
@@ -161,7 +214,7 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
     /* funzione che aggiunge un parametro tipovalore nel blocco chiamatametodo
      @param {obj} - obj è un parametro che definisce gojs in questo caso rappresenta l'oggetto nodo
      */
-    function addParam(e,obj) {
+    function addParam(e, obj) {
       const node = obj.part;
       const data = node.data;
       if (data) {
@@ -179,7 +232,7 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
     /* funzione che  rimuove un parametro dal blocco chiamatametodo
      @param {obj} - obj è un parametro che definisce gojs in questo caso rappresenta l'oggetto nodo
      */
-    function removeParam(e,obj) {
+    function removeParam(e, obj) {
       const node = obj.part;
       const data = node.data;
       let ind = Number(obj.text);
@@ -187,7 +240,7 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
       if (data) {
         node.diagram.startTransaction('rimosso parametro');
         myDiagram.model.removeArrayItem(data.parameters, ind);
-        for(; ind < data.parameters.length; ind++) {
+        for (; ind < data.parameters.length; ind++) {
           myDiagram.model.setDataProperty(data.parameters[ind], 'paramatersID', ind);
         }
         node.diagram.commitTransaction('rimosso parametro');
@@ -237,7 +290,7 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
         $(go.Panel,
           $(go.TextBlock, 'x', {font: 'bold 10pt Verdana, sans-serif', stroke: 'red'}),
           $(go.TextBlock,
-            new go.Binding('text', 'methodID').makeTwoWay(), {opacity:0}, {click:removeParam})
+            new go.Binding('text', 'methodID').makeTwoWay(), {opacity: 0}, {click: removeParam})
         )
       );
 
@@ -299,7 +352,7 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
               defaultAlignment: go.Spot.Left,
               itemTemplate: methodTemplate
             },
-            new go.Binding('visible','chiamatametodoVisible').makeTwoWay()
+            new go.Binding('visible', 'chiamatametodoVisible').makeTwoWay()
           ),
           $('PanelExpanderButton', 'PARAMETRI',
             {row: 2, visible: false, column: 3, alignment: go.Spot.TopRight},
@@ -514,14 +567,16 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
           contextMenu: //menu per la scelta della priorità
             $(go.Adornment, 'Vertical',
               { alignment: go.Spot.Top, alignmentFocus: go.Spot.Bottom },
+              $('Button', { click: function(e, obj) { changeOperatore(obj.part, '*');
+              }},  $(go.TextBlock, '*', {textAlign: 'center' , width: 30, height: 10 })),
               $('Button', { click: function(e, obj) { changeOperatore(obj.part, '+');
-              }},  $(go.TextBlock, '+', {textAlign:'center' , width: 30, height: 10 })),
+              }},  $(go.TextBlock, '+', {textAlign: 'center' , width: 30, height: 10 })),
               $('Button', { click: function(e, obj) { changeOperatore(obj.part, '-');
-              }},  $(go.TextBlock, '-', {textAlign:'center', width: 30, height: 10 })),
+              }},  $(go.TextBlock, '-', {textAlign: 'center', width: 30, height: 10 })),
               $('Button', { click: function(e, obj) { changeOperatore(obj.part, '.');
               }},  $(go.TextBlock, '.', {textAlign: 'center' , width: 30, height: 10 })),
               $('Button', { click: function(e, obj) { changeOperatore(obj.part, '->');
-              }},  $(go.TextBlock, '->', {textAlign:'center' , width: 30, height: 10 })),
+              }},  $(go.TextBlock, '->', {textAlign: 'center' , width: 30, height: 10 })),
               $('Button', { click: function(e, obj) { changeOperatore(obj.part, '=');
               }},  $(go.TextBlock, '=', {textAlign: 'center', width: 30, height: 10 })),
               $('Button', { click: function(e, obj) { changeOperatore(obj.part, '===');
@@ -539,6 +594,8 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
 
             )
         },
+
+
         new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
         $(go.Shape, 'Diamond', {width: 165, height: 60},
           { fill: 'white', strokeWidth: 1,
@@ -571,12 +628,12 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
 
 
     //creazione template nodo jolly
-    var jollytemplate =
+    const jollytemplate =
       $(go.Node, 'Auto',
         new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
         $(go.Shape, 'ExternalOrganization', {
             name: 'SHAPE',
-            fill: "white", strokeWidth: 1,
+            fill: 'white', strokeWidth: 1,
             minSize: new go.Size(176, 50),
             portId: '', fromLinkable: true,
             toLinkable: true,
@@ -704,12 +761,12 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
       $(go.Adornment, 'Link',
         $(go.Shape,
 
-          {  isPanelMain: true, fill: null, stroke:null, strokeWidth: 0 })
+          {  isPanelMain: true, fill: null, stroke: null, strokeWidth: 0 })
       );
 
 
     //creazione template link Avanzamento
-    myDiagram.linkTemplateMap.add("",
+    myDiagram.linkTemplateMap.add('',
       $(go.Link,
         {selectable: true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate},
         {relinkableFrom: true, relinkableTo: true, reshapable: true},
@@ -719,8 +776,8 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
           corner: 5,
           toShortLength: 2
         },
-        new go.Binding("location", "loc").makeTwoWay(),
-        new go.Binding("points").makeTwoWay(),
+        new go.Binding('location', 'loc').makeTwoWay(),
+        new go.Binding('points').makeTwoWay(),
         $(go.Shape,
           {stroke: 'black', isPanelMain: true, strokeWidth: 2}),
         $(go.Shape,  // the arrowhead
@@ -743,15 +800,20 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
     //creazione template per i gruppi di nodi
     myDiagram.groupTemplate =
       $(go.Group, 'Auto',
-        new go.Binding('isSubGraphExpanded','groupVisible').makeTwoWay(),
+        new go.Binding('isSubGraphExpanded', 'groupVisible').makeTwoWay(),
         new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
         {
           background: '#ededed',
            mouseDragEnter: function(e, grp, prev) { highlightGroup(e, grp, true); },
             mouseDragLeave: function(e, grp, next) { highlightGroup(e, grp, false); },
           computesBoundsAfterDrag: true,
+          //////proprietà aggiunte per la location dei nodi:
           mouseDrop: finishDrop,
-          handlesDragDropForMembers: false,
+          handlesDragDropForMembers: true,
+          layout:
+            $(go.GridLayout,
+              { alignment: go.GridLayout.Location,
+                cellSize: new go.Size(1, 1), spacing: new go.Size(4, 4) })
         },
         new go.Binding('background', 'isHighlighted', function(h) { return h ? 'rgba(255,0,0,0.2)' : 'white'; }).ofObject(),
         $(go.Shape, 'Rectangle',
@@ -856,15 +918,44 @@ export class ActivitydiagrameditorComponent implements AfterViewInit {
       }
     });
 
+    document.getElementById("containerActivityDX").addEventListener('click', (e) => {
+      setTimeout(() => {
+        myDiagram.animationManager.isEnabled = false;
+        myDiagram.model = go.Model.fromJson(this.project.getSelectedMethodDiagram(),
+          $(go.GraphLinksModel,
+            {
+              copiesArrays: true,
+              copiesArrayObjects: true
+            }
+          )
+        );
+        myDiagram.animationManager.isEnabled = true;
+      }, 500);
+    });
+
     /* funzione che modifica il tipo di operatore all'interno del blocco operazione
      @param {node, newoperator} - node è un parametro di tipo Node che si riferisce la nodo operazione
      - newoperator è un parametro di tipo stringa che rappresenta il nuovo operatore da inserire*/
-    function changeOperatore(node, newoperator){
+    function changeOperatore(node, newoperator) {
       myDiagram.startTransaction('change block operator');
       myDiagram.model.setDataProperty(node.data, 'nome', newoperator);
       myDiagram.commitTransaction('Changed block operator');
 
     };
+  }
+
+  ngAfterViewChecked() {
+    const sxcol = document.getElementsByClassName('insertMethod');
+    for ( let i = 0; i < sxcol.length; ++i) {
+      if (sxcol[i].getAttribute('listened') === 'false') {
+        sxcol[i].setAttribute('listened', 'true');
+        sxcol[i].addEventListener('click', (e) => {
+          // si fa dare il template dal service con Id
+          this.templateService.getTemplate(sxcol[i].id).subscribe(data =>
+            this.project.addPatternToActivityDiagram(data));
+        });
+      }
+    }
   }
 
 }

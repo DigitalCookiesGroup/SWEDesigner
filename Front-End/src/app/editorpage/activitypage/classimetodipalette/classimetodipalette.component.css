@@ -85,7 +85,10 @@
 .methodListActive {
   color: #fdd835;
   font-weight: bold;
-;
+}
+
+span .methodList{
+  width:auto;
 }
 
 /*

@@ -1,0 +1,4 @@
+)aggiungere valori di default sugli attributi di una classe e aggiungere valori di default ai parametri di una funzione
+)guardare bene le frecce..perchè nelle classi se c'è la generalizzazione bisgna mettere public class...guardare come funziona in java
+)guardare la st e separare bene l'algo di parser... fare un file dove c'è scrittura su file e chiamata del file generazione codice della classe che poi a sua volta chiama un file di generazione codice delle attività
+

@@ -24,7 +24,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CodeService {
 
-  private host = 'http://localhost:3000/';
+  private host = '';
 
   constructor(private http: Http) {}
 

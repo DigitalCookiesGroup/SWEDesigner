@@ -33,9 +33,7 @@ export class EditorpageComponent implements OnInit {
   constructor(private project: Project) { }
 
   saveProject() {
-    // crea json
-    // crea il blob col json o txt
-    const blob = new Blob([this.project.getFullDiagram()], { type: 'text/plain'});
+    const blob = new Blob([JSON.stringify(this.project.save())], { type: 'text/plain'});
     FileSaver.saveAs(blob, '' + this.project.getName() + '.json');
   }
 

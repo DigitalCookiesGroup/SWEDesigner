@@ -42,5 +42,5 @@ exports.getCategoria = (cat, cb) => {
 			cb(null, r);  //funziona solo senza il res.send e senza il log
 			//console.log(err,r);
 		}	
-	}).select('Id Titolo');
+	}).select('Id Titolo Segnatura Pre Post');
 }

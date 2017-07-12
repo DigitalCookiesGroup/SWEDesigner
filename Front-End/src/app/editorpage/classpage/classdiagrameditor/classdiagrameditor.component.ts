@@ -312,13 +312,13 @@ export class ClassdiagrameditorComponent implements AfterViewInit, AfterViewChec
           contextMenu: //menu per la scelta della priorità
             $(go.Adornment, 'Vertical',
               { alignment: go.Spot.Top, alignmentFocus: go.Spot.Right },
-              $('Button', { width:100, click: function(e, obj) { changeVisibilityMethod(obj.part, '+');
+              $('Button', { width: 100, click: function(e, obj) { changeVisibilityMethod(obj.part, '+');
               }},  $(go.TextBlock, '(+) public')),
-              $('Button', { width:100, click: function(e, obj) { changeVisibilityMethod(obj.part, '-');
+              $('Button', { width: 100, click: function(e, obj) { changeVisibilityMethod(obj.part, '-');
               }},  $(go.TextBlock, '(-) private')),
-              $('Button', { width:100, click: function(e, obj) { changeVisibilityMethod(obj.part, '~');
+              $('Button', { width: 100, click: function(e, obj) { changeVisibilityMethod(obj.part, '~');
               }},  $(go.TextBlock, '(~) package')),
-              $('Button', { width:100, click: function(e, obj) { changeVisibilityMethod(obj.part, '#');
+              $('Button', { width: 100, click: function(e, obj) { changeVisibilityMethod(obj.part, '#');
               }},  $(go.TextBlock, '(#) protected'))
             )
         },
@@ -369,14 +369,14 @@ export class ClassdiagrameditorComponent implements AfterViewInit, AfterViewChec
         $(go.Panel, 'Table',
           {defaultAlignment: go.Spot.Center},
           $(go.TextBlock, 'Commento',
-            {row: 2, font: "bold 12pt sans-serif", margin: 3},
+            {row: 2, font: 'bold 12pt sans-serif', margin: 3},
             new go.Binding('visible', 'visible', function (v) {
               return !v;
             }).ofObject('TESTO')),
-          $(go.Panel,'Vertical', {name: 'TESTO'},
+          $(go.Panel, 'Vertical', {name: 'TESTO'},
             $(go.TextBlock, {editable: true, isMultiline: true, margin: 10},
               {row: 0, column: 0, columnSpan: 2, font: '10pt sans-serif'},
-              new go.Binding('text','description').makeTwoWay(),
+              new go.Binding('text', 'description').makeTwoWay(),
               new go.Binding('visible', 'descvisibile', function (v) {
                 return !v;
               }).ofObject('TESTO')),
@@ -411,13 +411,13 @@ export class ClassdiagrameditorComponent implements AfterViewInit, AfterViewChec
           contextMenu: //menu per la scelta della priorità
             $(go.Adornment, 'Vertical',
               { alignment: go.Spot.Top, alignmentFocus: go.Spot.Right },
-              $('Button', { width:100, click: function(e, obj) { changeVisibilityAttribute(obj.part, '+');
+              $('Button', { width: 100, click: function(e, obj) { changeVisibilityAttribute(obj.part, '+');
               }},  $(go.TextBlock, '(+) public')),
-              $('Button', { width:100, click: function(e, obj) { changeVisibilityAttribute(obj.part, '-');
+              $('Button', { width: 100, click: function(e, obj) { changeVisibilityAttribute(obj.part, '-');
               }},  $(go.TextBlock, '(-) private')),
-              $('Button', { width:100, click: function(e, obj) { changeVisibilityAttribute(obj.part, '~');
+              $('Button', { width: 100, click: function(e, obj) { changeVisibilityAttribute(obj.part, '~');
               }},  $(go.TextBlock, '(~) package')),
-              $('Button', { width:100, click: function(e, obj) { changeVisibilityAttribute(obj.part, '#');
+              $('Button', { width: 100, click: function(e, obj) { changeVisibilityAttribute(obj.part, '#');
               }},  $(go.TextBlock, '(#) protected'))
             )
         },
@@ -492,10 +492,10 @@ export class ClassdiagrameditorComponent implements AfterViewInit, AfterViewChec
                   { alignment: go.Spot.Top, alignmentFocus: go.Spot.Bottom },
                   $('Button', { click: function(e, obj) { changeStereotypeClass(obj.part, 'default');
                   }},  $(go.TextBlock, 'default', {textAlign: 'center' , width: 80, height: 15 })),
+                  $('Button', { click: function(e, obj) { changeStereotypeClass(obj.part, 'abstract');
+                  }},  $(go.TextBlock, 'abstract', {textAlign: 'center' , width: 80, height: 15, font: 'italic 10pt sans-serif' })),
                   $('Button', { click: function(e, obj) { changeStereotypeClass(obj.part, '<<interface>>');
-                  }},  $(go.TextBlock, '<<interface>>', {textAlign: 'center' , width: 80, height: 15 })),
-                  $('Button', { click: function(e, obj) { changeStereotypeClass(obj.part, '<<abstract>>');
-                  }},  $(go.TextBlock, '<<abstract>>', {textAlign: 'center' , width: 80, height: 15 }))
+                  }},  $(go.TextBlock, '<<interface>>', {textAlign: 'center' , width: 80, height: 15 }))
                 )
             },
             new go.Binding('text', 'tipo').makeTwoWay(),
@@ -510,6 +510,7 @@ export class ClassdiagrameditorComponent implements AfterViewInit, AfterViewChec
               isMultiline: false,
               editable: true
             },
+            new go.Binding('font', 'fontNomeClasse').makeTwoWay(),
             new go.Binding('text', 'name').makeTwoWay()),
           // attributi
           $(go.TextBlock, 'Attributi',
@@ -652,14 +653,21 @@ export class ClassdiagrameditorComponent implements AfterViewInit, AfterViewChec
       if (node.data.tipo === 'default') {
         myDiagram.startTransaction('change opacitytype classe');
         myDiagram.model.setDataProperty(node.data, 'tipoOpacity', 0.3);
+        myDiagram.model.setDataProperty(node.data, 'fontNomeClasse', 'bold 12pt sans-serif ');
+        myDiagram.commitTransaction('Changed opacity type classe');
+      }
+      else if (node.data.tipo === 'abstract') {
+        myDiagram.startTransaction('change opacitytype classe');
+        myDiagram.model.setDataProperty(node.data, 'tipoOpacity', 0.3);
+        myDiagram.model.setDataProperty(node.data, 'fontNomeClasse', 'bold italic 12pt sans-serif ');
         myDiagram.commitTransaction('Changed opacity type classe');
       }
       else {
         myDiagram.startTransaction('change opacitytype classe');
         myDiagram.model.setDataProperty(node.data, 'tipoOpacity', 1.0);
+        myDiagram.model.setDataProperty(node.data, 'fontNomeClasse', 'bold 12pt sans-serif ');
         myDiagram.commitTransaction('Changed opacity type classe');
       }
-
       if (node.data.tipo === '<<interface>>') {
         myDiagram.startTransaction('change notInterface');
         myDiagram.model.setDataProperty(node.data, 'notInterface', false);
@@ -838,7 +846,6 @@ export class ClassdiagrameditorComponent implements AfterViewInit, AfterViewChec
 
 
 
-
     myDiagram.addDiagramListener('TextEdited', (e) => { //all'edit di un campo textbox viene aggiornato il jSON
       this.project.setDiagram(myDiagram.model.toJson());
       console.log(this.project.getClassDiagram());
@@ -861,6 +868,22 @@ export class ClassdiagrameditorComponent implements AfterViewInit, AfterViewChec
       this.project.setDiagram(myDiagram.model.toJson());
       console.log(this.project.getClassDiagram());
     });
+
+    document.getElementById('library-items').addEventListener('click', (e) => {
+      setTimeout(() => {
+        myDiagram.animationManager.isEnabled = false;
+        myDiagram.model = go.Model.fromJson(this.project.getClassDiagram(),
+        $(go.GraphLinksModel,
+          {
+            copiesArrays: true,
+            copiesArrayObjects: true
+          }
+        )
+      );
+        myDiagram.animationManager.isEnabled = true;
+      }, 500);
+    });
+
 
     const prioritycontrols2 = document.getElementById('check2');
 

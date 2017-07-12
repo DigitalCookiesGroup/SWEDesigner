@@ -25,9 +25,13 @@
              <li class="method" *ngFor="let method of this.project.getClassMethods(class)" (click)="this.project.setSelectedMethod(class, method)">
                <span class="methodListActive" *ngIf="this.project.getSelectedMethod()[0] === class && this.project.getSelectedMethod()[1] === method">{{method}}</span>
                <span class="methodList" *ngIf="!(this.project.getSelectedMethod()[0] === class && this.project.getSelectedMethod()[1] === method)">{{method}}</span>
+               <span *ngFor="let segnature of this.project.getClassMethodsCarlo(class, method)"  >{{segnature}}</span>
                <span *ngIf="(this.project.getSelectedMethod()[0] === class && this.project.getSelectedMethod()[1] === method)" (click)="this.project.clearSelectedMethodDiagram()" ><img  src="../../../../assets/x.svg" class="delete-method"></span>
              </li>
            </ul>
   </div>
 </span>
+
+
+
 

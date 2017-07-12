@@ -17,8 +17,9 @@
     <div id="fileList">
       <h2>    Lista File     </h2>
            <ul>
-             <li  *ngFor="let file of this.code.files">
-                {{file.getName()}}
+             <li  *ngFor="let file of this.project.getCode()" (click)="this.setSelectedFile(file.name)">
+                <span class="fileListActive" *ngIf="this.project.getSelectedFileName() === file.name">{{file.name}}</span>
+                <span *ngIf="!(this.project.getSelectedFileName() === file.name)">{{file.name}}</span>
              </li>
            </ul>
   </div>

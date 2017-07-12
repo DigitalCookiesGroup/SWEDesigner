@@ -23,7 +23,7 @@
         <span class="minus" *ngIf="toggleList1"><img src="../../../../assets/meno.svg" class="listImage"></span>
         Classi
       </h3>
-      <div *ngIf="toggleList1">
+      <div id="lista1" *ngIf="toggleList1">
         <ul *ngFor="let class of classes">
           <li id={{class.Id}} [attr.listened]="false" class="libr">{{class.Titolo}}</li>
         </ul>
@@ -33,7 +33,7 @@
         <span class="minus" *ngIf="toggleList2"><img src="../../../../assets/meno.svg" class="listImage"></span>
         Pattern
       </h3>
-      <div *ngIf="toggleList2">
+      <div id="lista2" *ngIf="toggleList2">
         <ul *ngFor="let pattern of patterns">
           <li id={{pattern.Id}} [attr.listened]="false" class="libr">{{pattern.Titolo}} <span><img src="../../../../assets/{{pattern.Titolo}}.png"></span></li>
         </ul>

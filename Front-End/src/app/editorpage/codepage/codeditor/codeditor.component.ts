@@ -13,19 +13,23 @@
  *
  */
 
-import { Component, OnInit } from '@angular/core';
-import {Project} from "../../../project";
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import {Project} from '../../../project';
+
+import 'brace/theme/sqlserver';
+import 'brace/mode/java';
 
 @Component({
   selector: 'app-codeditor',
   templateUrl: './codeditor.component.html',
   styleUrls: ['./codeditor.component.css']
 })
-export class CodeditorComponent implements OnInit {
+export class CodeditorComponent implements AfterViewInit {
 
   constructor(private project: Project) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+
   }
 
 }

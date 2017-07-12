@@ -14,5 +14,5 @@
 -->
 
 <span class="diagramBlock">
-        <div ace-editor id="codeEditor" [theme]="'katzenmilch'" [text]="this.project.getCode()"></div>
+        <div ace-editor id="codeEditor" #editor [theme]="'sqlserver'" [text]="this.project.getSelectedCode()" [mode]="'java'"></div>
 </span>

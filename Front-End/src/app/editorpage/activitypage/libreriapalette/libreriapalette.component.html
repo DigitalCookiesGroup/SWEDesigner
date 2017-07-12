@@ -16,20 +16,20 @@
 
 
 <span class="paletteDX" xmlns="http://www.w3.org/1999/html">
-    <div class="myActivityLibraryItem" *ngFor="let class of this.project.getClassesNames(); let i=index" [attr.data-index]="i">
-      <span class="insertMethod"><img src="../../../../assets/insert.svg" class="listImage"></span>
+    <div class="myActivityLibraryItem" *ngFor="let activity of this.activityList; let i=index" [attr.data-index]="i">
+      <span class="insertMethod" [attr.listened]="false" id={{activity.Id}}><img src="../../../../assets/insert.svg" class="listImage"></span>
       <h2 (click)="open(i)">
-           {{class}}
+           {{activity.Titolo}}
             <span class="plus" *ngIf="!toggleList[i]"><img src="../../../../assets/piu.svg" class="listImage"></span>
         <span class="minus" *ngIf="toggleList[i]"><img src="../../../../assets/meno.svg"  class="listImage"></span>
          </h2>
                <span class = "methodDescription" *ngIf="toggleList[i]">
-                  <p>SEGNATUARA:
-                 int fun(int, double)
-                  PRECONDIZIONE:
-                    descr. precondizione
-                  POSTCONDIZIONE:
-                 descr. postcondizione
+                  <p>SEGNATURA:
+                    {{activity.Segnatura}}</p>
+                  <p>PRECONDIZIONE:
+                    {{activity.Pre}}</p>
+                  <p>POSTCONDIZIONE:
+                 {{activity.Post}}
                   </p>
                </span>
 

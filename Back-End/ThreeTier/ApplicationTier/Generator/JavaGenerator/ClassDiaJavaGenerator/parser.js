@@ -23,7 +23,7 @@
 
 
 var fs = require("fs");
-var file = "file.txt" ; //CAMBIARE ESTENSIONE FILE
+//var file = "file.txt" ; //CAMBIARE ESTENSIONE FILE
 
 
 
@@ -43,12 +43,12 @@ var json = JSON.parse(fs.readFileSync('/path/to/file.json', 'utf8'));
 
 
 //funzione di scrittura sul file
-function WriteFile(file, content) {
+/*function WriteFile(file, content) {
   fs.writeFile(file, content, function (err) {
     if (err) return console.log(err) ;
     console.log("Written: " + file) ;
   });
-} ;
+} ;*/
 
 var ClassJavaGenerator = require('./ClassJavaGenerator.js');
 var RelationJavaGenerator = require('./RelationJavaGenerator.js');
@@ -60,37 +60,47 @@ exports.ClassDiaJavaGenerator = (string) => {
 	var obj_json = string;
 	var obj = obj_json.nodeDataArray;  
 	var objRel = obj_json.linkDataArray; 
-	var ris = ""; // è la variabile che andrà stampata nel file che finita rispecchierà le classi
+	var res = [];
 	if(obj != 0){
 		var lunghezza_corpo_json = obj.length;
 		for(var s=0; s < lunghezza_corpo_json; s++){
+			var ris = {};
+			ris.body = ""; 
+			
+			ris.name = obj[s].name;
+
 			if(obj[s].category == "Classe"){
-				ris = ris + "public ";
-				if(obj[s].tipo == "<<abstract>>"){
-					ris = ris + "abstract ";
+				ris.body = ris.body + "public ";
+				if(obj[s].tipo == "abstract"){
+					ris.body = ris.body + "abstract ";
 				}else{
 					if(obj[s].tipo == "<<interface>>" || obj[s].tipo == "interface"){
-						ris = ris + "interface ";
+						ris.body = ris.body + "interface ";
 					}
 				}
 				/*********************RELAZIONI DI DIPENDENZA*******************/
-				ris =  RelationJavaGenerator.getGeneratedRelationCode(obj[s],obj,objRel,ris);
+				ris.body =  RelationJavaGenerator.getGeneratedRelationCode(obj[s],obj,objRel,ris.body);
 
-				ris = ris + "{ \n";
+				ris.body = ris.body + "{ \n";
 				/*********************CREAZIONE CORPO CLASSE*******************/
-				ris = ClassJavaGenerator.getGeneratedClassCode(obj[s],objRel,ris);
+				ris.body = ClassJavaGenerator.getGeneratedClassCode(obj[s],objRel,ris.body);
 				/*********************FINE CREAZIONE CORPO CLASSE*******************/
-				ris = ris + "\n}\n\n" //fine classe
+				ris.body = ris.body + "\n}\n\n" //fine classe
 			}
+
+			res[s] = ris;
 		}
 	}else{
-		ris = "non è stata creata ancora nessuna classe";
+		var ris = {};
+		ris.name = "errore";
+		ris.body = "ERRORE: non è stata creata ancora nessuna classe, impossibile generare codice.";
+		res[0] = ris;
 	}
 
-	var content = new Buffer(ris) ;
-	WriteFile(file, content) ;
-
-	return ris;
+	//var content = new Buffer(ris) ;
+	//WriteFile(file, content) ;
+	
+	return res;
 }
 
 /*

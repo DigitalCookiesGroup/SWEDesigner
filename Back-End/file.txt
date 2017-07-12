@@ -1,0 +1,8 @@
+public class Classe{ 
+public String attributo1; 
+public void metodo1(tipo1 param1){
+return Tipo Variabile=Valore;
+}
+
+}
+

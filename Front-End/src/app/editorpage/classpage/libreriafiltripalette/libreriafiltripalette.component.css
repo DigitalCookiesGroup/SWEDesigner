@@ -20,6 +20,7 @@
 	height: 100%;
 	background-color: #2e323e;
   padding: 0.5em;
+  overflow-y: scroll;
 }
 
 .paletteSX h2 {
@@ -53,6 +54,10 @@
 
 #library-items li span {
   display: none;
+
+  transition-property: visibility;
+  transition-duration: 3s;
+  transition-timing-function: step-end;
 }
 
 #library-items li:hover  {
@@ -65,6 +70,13 @@
   left: 23em;
   top: 12.3em;
   z-index: 99;
+
+  animation: cssAnimation 0s ease-in 3s forwards;
+}
+@keyframes cssAnimation {
+  to{
+    visibility: hidden;
+  }
 }
 
 
